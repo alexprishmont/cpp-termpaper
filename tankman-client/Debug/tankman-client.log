@@ -1,0 +1,11 @@
+﻿  Manager.cpp
+c:\users\alex\desktop\the tankman\tankman-client\tankman-client\source\game\manager\manager.cpp(25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\alex\desktop\the tankman\tankman-client\tankman-client\source\game\manager\manager.cpp(27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\alex\desktop\the tankman\tankman-client\tankman-client\source\game\manager\manager.cpp(29): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\alex\desktop\the tankman\tankman-client\tankman-client\source\game\manager\manager.cpp(31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Mouse.cpp
+  Keyboard.cpp
+  tankman-client.vcxproj -> C:\Users\Alex\Desktop\the tankman\tankman-client\Debug\tankman-client.exe
+  tankman-client.vcxproj -> C:\Users\Alex\Desktop\the tankman\tankman-client\Debug\tankman-client.pdb (Partial PDB)
