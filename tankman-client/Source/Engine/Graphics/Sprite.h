@@ -16,6 +16,8 @@ class Sprite {
 
 		void setPosition(float _xPos, float _yPos);
 		void setRotation(float _rot);
+		
+		double getRotation();
 
 		double getPositionX();
 		double getPositionY();

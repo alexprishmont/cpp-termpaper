@@ -1,7 +1,7 @@
 #include "Engine.h"
 
 // Game window height & width
-int Engine::screenHeight = 800;
+int Engine::screenHeight = 650;
 int Engine::screenWidth = 1180;
 
 // Engine constructor & destructor

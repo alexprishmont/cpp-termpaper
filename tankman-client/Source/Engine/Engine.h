@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <Windows.h>
 #include <GLFW\glfw3.h>
 
 // Textures
@@ -13,7 +12,7 @@
 #include "IO\Mouse.h"
 
 // Physics
-
+#include "Physics/Body.h"
 
 class Engine {
 	public:

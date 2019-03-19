@@ -80,6 +80,9 @@ double Sprite::getPositionX() {
 	return xPos;
 }
 
+double Sprite::getRotation() {
+	return rot;
+}
 double Sprite::getPositionY() {
 	return yPos;
 }

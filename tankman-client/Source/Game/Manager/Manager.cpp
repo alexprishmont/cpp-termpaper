@@ -3,10 +3,7 @@
 Manager::Manager() {
 	engine = new Engine();
 	engine->initWindow("CLIENT");
-
-	startSprite = Sprite("Source/Assets/Art/Player/NPC.png", 100, 100);
-	startSprite.setScale(1.0f);
-
+	
 	state = Gamestate::START;
 }
 
@@ -23,19 +20,13 @@ void Manager::Start() {
 		
 		// TO-DO: A class for player (movement, rotation, shooting, etc.)
 		// TO-DO: Physics (gravitation, etc.)
-		if (Keyboard::Key(GLFW_KEY_UP))
-			startSprite.setPosition(startSprite.getPositionX(), startSprite.getPositionY() + 1.0);
-		if (Keyboard::Key(GLFW_KEY_DOWN))
-			startSprite.setPosition(startSprite.getPositionX(), startSprite.getPositionY() - 1.0);
-		if (Keyboard::Key(GLFW_KEY_LEFT))
-			startSprite.setPosition(startSprite.getPositionX() - 1.0, startSprite.getPositionY());
-		if (Keyboard::Key(GLFW_KEY_RIGHT))
-			startSprite.setPosition(startSprite.getPositionX() + 1.0, startSprite.getPositionY());
+		Body player("Source/Assets/Art/Player/Player1.png");
 
+		player.initInput();
 		switch (state) {
 			case Gamestate::START: {
 				engine->beginRender();
-				startSprite.Render();
+				player.render();
 				engine->endRender();
 				break;
 			}
