@@ -3,12 +3,20 @@
 Manager::Manager() {
 	engine = new Engine();
 	engine->initWindow("CLIENT");
+
+	map = new MapLoader();
+	map->create();
 	
 	state = Gamestate::START;
+
+	player = new Player(map->getPlayerPosition());
+
 }
 
 Manager::~Manager() {
 	delete engine;
+	delete map;
+	delete player;
 }
 
 void Manager::Start() {
@@ -20,13 +28,12 @@ void Manager::Start() {
 		
 		// TO-DO: A class for player (movement, rotation, shooting, etc.)
 		// TO-DO: Physics (gravitation, etc.)
-		Body player("Source/Assets/Art/Player/Player1.png");
-
-		player.initInput();
 		switch (state) {
 			case Gamestate::START: {
+				player->move();
 				engine->beginRender();
-				player.render();
+				map->render();
+				player->render();
 				engine->endRender();
 				break;
 			}

@@ -1,8 +1,8 @@
 #include "Engine.h"
 
 // Game window height & width
-int Engine::screenHeight = 650;
-int Engine::screenWidth = 1180;
+int Engine::screenHeight = 600;
+int Engine::screenWidth = 800;
 
 // Engine constructor & destructor
 Engine::Engine() {
@@ -66,7 +66,7 @@ void Engine::Update() {
 }
 
 void Engine::beginRender() {
-	glClearColor(0, 1, 0, 1);
+	glClearColor(1, 1, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

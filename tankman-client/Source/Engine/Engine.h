@@ -12,7 +12,6 @@
 #include "IO\Mouse.h"
 
 // Physics
-#include "Physics/Body.h"
 
 class Engine {
 	public:

@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include "../Source/Engine/Engine.h"
+#include "../MapLoader/MapLoader.h"
+#include "../Player/Player.h"
 
 class Manager {
 	public:
@@ -18,6 +20,8 @@ class Manager {
 	private:
 		void setState();
 		Engine *engine;
+		MapLoader* map;
 		Sprite startSprite;
 		Gamestate state;
+		Player *player;
 };
