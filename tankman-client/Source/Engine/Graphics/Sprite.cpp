@@ -51,6 +51,11 @@ void Sprite::Render() {
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
+
+	bounds[0] = xPos; // right side
+	bounds[1] = xPos + (texture.getWidth() * scaleX); // left side
+	bounds[2] = (yPos); // top side
+	bounds[3] = (yPos + (texture.getHeight() * scaleX)); // bottom side
 }
 
 void Sprite::Update() {

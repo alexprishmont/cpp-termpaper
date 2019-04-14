@@ -9,7 +9,7 @@ Manager::Manager() {
 	
 	state = Gamestate::START;
 
-	player = new Player(map->getPlayerPosition());
+	player = new Player(map);
 
 }
 
@@ -19,10 +19,21 @@ Manager::~Manager() {
 	delete player;
 }
 
+double lastTime = glfwGetTime();
+int nbFrames = 0;
+
 void Manager::Start() {
 	while (true) {
 		if (Keyboard::Key(GLFW_KEY_ESCAPE))
 			break;
+
+		double currentTime = glfwGetTime();
+		nbFrames++;
+		if (currentTime - lastTime >= 1.0) {
+			printf("%f ms/frame\n", 1000.0 / double(nbFrames));
+			nbFrames = 0;
+			lastTime += 1.0;
+		}
 
 		engine->Update();
 		

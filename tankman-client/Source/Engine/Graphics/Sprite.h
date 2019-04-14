@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Sprite {
 	public:
@@ -25,13 +26,16 @@ class Sprite {
 
 		void setScale(float x);
 		void setScale(float x, float y);
+		
+		float bounds[4];
 	private:
 		Texture texture;
-
+		
 		float xPos;
 		float yPos;
 		float rot;
 
 		float scaleX;
 		float scaleY;
+
 };
