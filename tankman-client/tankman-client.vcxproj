@@ -25,8 +25,10 @@
     <ClCompile Include="Source\Engine\IO\Keyboard.cpp" />
     <ClCompile Include="Source\Engine\IO\Mouse.cpp" />
     <ClCompile Include="Source\Engine\Maths\Vector3.cpp" />
-    <ClCompile Include="Source\Engine\Physics\Body.cpp" />
     <ClCompile Include="Source\Game\Manager\Manager.cpp" />
+    <ClCompile Include="Source\Game\MapLoader\MapLoader.cpp" />
+    <ClCompile Include="Source\Game\NPC\npc.cpp" />
+    <ClCompile Include="Source\Game\Player\Player.cpp" />
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -36,8 +38,14 @@
     <ClInclude Include="Source\Engine\IO\Keyboard.h" />
     <ClInclude Include="Source\Engine\IO\Mouse.h" />
     <ClInclude Include="Source\Engine\Maths\Vector3.h" />
-    <ClInclude Include="Source\Engine\Physics\Body.h" />
     <ClInclude Include="Source\Game\Manager\Manager.h" />
+    <ClInclude Include="Source\Game\MapLoader\MapLoader.h" />
+    <ClInclude Include="Source\Game\NPC\npc.h" />
+    <ClInclude Include="Source\Game\Player\initPosition.h" />
+    <ClInclude Include="Source\Game\Player\Player.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Levels\level1.cfg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -100,7 +108,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;SOIL.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;SOIL.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

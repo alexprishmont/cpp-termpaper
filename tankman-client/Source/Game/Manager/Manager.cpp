@@ -11,12 +11,20 @@ Manager::Manager() {
 
 	player = new Player(map);
 
+	startSprite = Sprite("Source/Assets/Art/startgame.png", engine->screenWidth/2, engine->screenHeight/2);
+	startSprite.setScale(1.0f);
+
+	gameover = Sprite("Source/Assets/Art/gameover.png", engine->screenWidth / 2, engine->screenHeight / 2);
+	gameover.setScale(1.0f);
+
+	npcs = new NPC(map->monsters, map);
 }
 
 Manager::~Manager() {
 	delete engine;
-	delete map;
 	delete player;
+	delete map;
+	delete npcs;
 }
 
 double lastTime = glfwGetTime();
@@ -41,19 +49,37 @@ void Manager::Start() {
 		// TO-DO: Physics (gravitation, etc.)
 		switch (state) {
 			case Gamestate::START: {
-				player->move();
 				engine->beginRender();
 				map->render();
-				player->render();
+				startSprite.Render();
 				engine->endRender();
+
+				if (Keyboard::Key(GLFW_KEY_ENTER))
+					state = Gamestate::PLAYING;
 				break;
 			}
 			case Gamestate::GAMEOVER: {
 				// TO-DO: Game Over screen
+				engine->beginRender();
+				gameover.Render();
+				engine->endRender();
+
+				if (Keyboard::Key(GLFW_KEY_ENTER))
+					state = Gamestate::PLAYING;
 				break;
 			}
 			case Gamestate::PLAYING: {
 				// TO-DO: Playing screen
+				player->move();
+				npcs->move();
+				engine->beginRender();
+				map->render();
+				player->render();
+				npcs->render();
+				engine->endRender();
+
+				if (player->lives <= 0)
+					state = Gamestate::GAMEOVER;
 				break;
 			}
 		}

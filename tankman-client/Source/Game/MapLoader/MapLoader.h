@@ -11,10 +11,15 @@ class MapLoader {
 	public:
 		MapLoader();
 		MapLoader(std::string path);
+
 		void create();
 		void render();
+
 		playerPosition getPlayerPosition();
+
 		std::vector<Sprite> sprites;
+		std::vector<Sprite> coins;
+		std::vector<Sprite> monsters;
 	private:
 		std::vector<std::vector<char>> levelMap;
 		std::fstream mapFile;

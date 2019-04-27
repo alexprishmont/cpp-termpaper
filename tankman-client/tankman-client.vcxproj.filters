@@ -39,7 +39,13 @@
     <ClCompile Include="Source\Engine\Maths\Vector3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Engine\Physics\Body.cpp">
+    <ClCompile Include="Source\Game\MapLoader\MapLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\Player\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Game\NPC\npc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,8 +71,20 @@
     <ClInclude Include="Source\Engine\Maths\Vector3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Physics\Body.h">
+    <ClInclude Include="Source\Game\MapLoader\MapLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Game\Player\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\Player\initPosition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\NPC\npc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Levels\level1.cfg" />
   </ItemGroup>
 </Project>

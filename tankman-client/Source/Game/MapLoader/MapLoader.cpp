@@ -45,12 +45,26 @@ void MapLoader::create() {
 				player.x = j * width + width / 2;
 				player.y = i * height + height / 2 + 16;
 			}
+			else if (temp == '^') {
+				Sprite* coin;
+				coin = new Sprite("Source/Assets/Art/Player/coin.png", j * width + width/2, i * height + height/2 + 3);
+				coin->setScale(scale);
+				coins.push_back(*coin);
+			}
+			else if (temp == '%') {
+				Sprite* monster;
+				monster = new Sprite("Source/Assets/Art/Player/blobRight.png", j * width + width / 2, i * height + height / 2);
+				monster->setScale(scale);
+				monsters.push_back(*monster);
+			}
 		}
 	}
 }
 
 void MapLoader::render() {
 	for (auto i : sprites)
+		i.Render();
+	for (auto i : coins)
 		i.Render();
 }
 

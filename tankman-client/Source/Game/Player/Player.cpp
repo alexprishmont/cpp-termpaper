@@ -11,25 +11,18 @@ Player::Player(MapLoader* map) {
 
 Player::~Player() {
 	delete body;
+	delete mmap;
 }
 
 float Player::speed = 1.5;
 
-/*
-	bounds[0] - right side
-	bounds[1] - left side
-	bounds[2] - top side
-	bounds[3] - bottom side
-*/
-
-void Player::collide() {
-	float 
-		x = body->getPositionX(),
-		y = body->getPositionY(),
-		*border = body->bounds;
-	
-	if (x > border[1])
-		body->setPosition(border[1], y);
+bool Player::collide(Sprite *obj) {
+	float difX = body->getPositionX() - obj->getPositionX();
+	float difY = body->getPositionY() - obj->getPositionY();
+	if (abs(difX) < body->sizeX && abs(difY) < body->sizeY)
+		return true;
+	else
+		return false;
 }
 
 void Player::move() {
@@ -40,8 +33,8 @@ void Player::move() {
 	else if (!Keyboard::Key(GLFW_KEY_SPACE))
 		speed = 1.5;
 
-
 	// Move it!
+	float prevX = body->getPositionX(), prevY = body->getPositionY();
 	if (Keyboard::Key(GLFW_KEY_UP)) {
 		body->setPosition(body->getPositionX(), body->getPositionY() + 1 * speed);
 	}
@@ -54,10 +47,17 @@ void Player::move() {
 	if (Keyboard::Key(GLFW_KEY_RIGHT)) {
 		body->setPosition(body->getPositionX() + 1 * speed, body->getPositionY());
 	}
-	// Detect collisions
-	collide();
+
+	for (auto _sprite : mmap->sprites) {
+		if (collide(&_sprite)) {
+			body->setPosition(prevX, prevY);
+		}
+	}
 }
 
 void Player::render() {
 	body->Render();
 }
+
+Player::Player() {}
+Sprite Player::getBody() { return *body;  }

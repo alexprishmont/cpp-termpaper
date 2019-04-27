@@ -27,7 +27,8 @@ class Sprite {
 		void setScale(float x);
 		void setScale(float x, float y);
 		
-		float bounds[4];
+		float sizeX;
+		float sizeY;
 	private:
 		Texture texture;
 		

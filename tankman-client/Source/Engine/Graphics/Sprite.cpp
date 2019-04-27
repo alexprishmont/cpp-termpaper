@@ -52,10 +52,8 @@ void Sprite::Render() {
 
 	glDisable(GL_TEXTURE_2D);
 
-	bounds[0] = xPos; // right side
-	bounds[1] = xPos + (texture.getWidth() * scaleX); // left side
-	bounds[2] = (yPos); // top side
-	bounds[3] = (yPos + (texture.getHeight() * scaleX)); // bottom side
+	sizeX = texture.getWidth();
+	sizeY = texture.getHeight();
 }
 
 void Sprite::Update() {
@@ -85,9 +83,10 @@ double Sprite::getPositionX() {
 	return xPos;
 }
 
-double Sprite::getRotation() {
-	return rot;
-}
 double Sprite::getPositionY() {
 	return yPos;
+}
+
+double Sprite::getRotation() {
+	return rot;
 }
