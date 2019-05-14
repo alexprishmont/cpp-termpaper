@@ -56,6 +56,7 @@ void MapLoader::create() {
 				monster = new Sprite("Source/Assets/Art/Player/blobRight.png", j * width + width / 2, i * height + height / 2);
 				monster->setScale(scale);
 				monsters.push_back(*monster);
+				mPositions.push_back(std::make_pair(j * width + width / 2, i * height + height / 2));
 			}
 			else if (temp == 'e') {
 				Sprite* _exit;
@@ -78,4 +79,29 @@ void MapLoader::render() {
 
 playerPosition MapLoader::getPlayerPosition() {
 	return player;
+}
+
+void MapLoader::reCreateCoins() {
+
+	int width = Engine::screenWidth / levelMap[0].size();
+	int height = Engine::screenHeight / levelMap.size();
+
+	float scale = width / 32;
+
+	for (int i = 0; i < levelMap.size(); i++) {
+		for (int j = 0; j < levelMap[i].size(); j++) {
+			char temp = levelMap[i][j];
+			if (temp == '^') {
+				Sprite* coin;
+				coin = new Sprite("Source/Assets/Art/Player/coin.png", j * width + width / 2, i * height + height / 2 + 3);
+				coin->setScale(scale);
+				coins.push_back(*coin);
+			}
+		}
+	}
+}
+
+void MapLoader::respawnMonsters() {
+	for (int i = 0; i < monsters.size(); i++)
+		monsters[i].setPosition(mPositions[i].first, mPositions[i].second);
 }

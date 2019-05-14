@@ -14,6 +14,8 @@ class MapLoader {
 
 		void create();
 		void render();
+		void reCreateCoins();
+		void respawnMonsters();
 
 		playerPosition getPlayerPosition();
 
@@ -25,4 +27,5 @@ class MapLoader {
 		std::vector<std::vector<char>> levelMap;
 		std::fstream mapFile;
 		playerPosition player;
+		std::vector< std::pair<float, float> > mPositions;
 };

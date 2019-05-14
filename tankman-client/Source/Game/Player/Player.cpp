@@ -1,4 +1,7 @@
 #include "Player.h"
+#include "../Source/Engine/IO/Keyboard.h"
+#include "../Source/Game/Manager/Manager.h"
+
 Player::Player(MapLoader* map) {
 	playerPosition player = map->getPlayerPosition();
 	body = new Sprite("Source/Assets/Art/Player/elf_male.png", player.x, player.y);
@@ -72,7 +75,6 @@ void Player::render() {
 	body->Render();
 }
 
-Player::Player() {}
 Sprite* Player::getBody() { return body;  }
 
 void Player::setPosition(float x, float y) {

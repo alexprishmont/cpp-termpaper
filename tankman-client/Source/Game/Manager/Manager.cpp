@@ -14,10 +14,10 @@ Manager::Manager() {
 	
 	player = new Player(map);
 
-	startSprite = Sprite("Source/Assets/Art/startgame.png", engine->screenWidth/2, engine->screenHeight/2);
+	startSprite = Sprite("Source/Assets/Art/startgame.png", (float)engine->screenWidth/2.0f, (float)engine->screenHeight/2.0f);
 	startSprite.setScale(1.0f);
 
-	gameover = Sprite("Source/Assets/Art/gameover.png", engine->screenWidth / 2, engine->screenHeight / 2);
+	gameover = Sprite("Source/Assets/Art/gameover.png", (float)engine->screenWidth / 2.0f, (float)engine->screenHeight / 2.0f);
 	gameover.setScale(1.0f);
 
 	npcs = new NPC(map, player);
@@ -67,8 +67,16 @@ void Manager::Start() {
 					startSprite.Render();
 				engine->endRender();
 
-				if (Keyboard::Key(GLFW_KEY_ENTER))
+				if (Keyboard::Key(GLFW_KEY_ENTER)) {
 					state = Gamestate::PLAYING;
+					if (Manager::theend) {
+						playerPosition pl = map->getPlayerPosition();
+						player->setPosition(pl.x, pl.y);
+						Manager::theend = false;
+						map->reCreateCoins();
+						map->respawnMonsters();
+					}
+				}
 				break;
 			}
 			case Gamestate::GAMEOVER: {
@@ -81,6 +89,8 @@ void Manager::Start() {
 					playerPosition pl = map->getPlayerPosition();
 					player->setPosition(pl.x, pl.y);
 					Manager::gmover = false;
+					map->reCreateCoins();
+					map->respawnMonsters();
 				}
 				break;
 			}
@@ -89,7 +99,7 @@ void Manager::Start() {
 					state = Gamestate::GAMEOVER;
 
 				if (Manager::theend == true)
-					state = Gamestate::END;
+					state = Gamestate::START;
 				
 				player->move();
 				npcs->move();

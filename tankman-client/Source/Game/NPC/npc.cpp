@@ -5,7 +5,7 @@ float randFloat(float a, float b) {
 	return ((b - a) * ((float)rand() / RAND_MAX)) + a;
 }
 
-NPC::NPC(MapLoader* map, Player* _player) { mmap = map; player = _player;  }
+NPC::NPC(MapLoader* map, Player* _player) { mmap = map; player = _player; moveY = false; }
 NPC::~NPC() { 
 	if (mmap != nullptr)
 		delete mmap; 
@@ -28,19 +28,21 @@ void NPC::move() {
 	for (int i = 0; i < mmap->monsters.size(); i++) {
 		float prevX = mmap->monsters[i].getPositionX(), prevY = mmap->monsters[i].getPositionY();
 		float randX = randFloat(-5.0f, 6.0f), randY = randFloat(-3.0f, 5.0f);
-		mmap->monsters[i].setPosition(prevX + randX, prevY + randY);
+
+		if (!moveY) {
+			mmap->monsters[i].setPosition(prevX + randX, prevY);
+			moveY = true;
+		}
+		else {
+			mmap->monsters[i].setPosition(prevX, prevY + randY);
+			moveY = false;
+		}
 
 		if (collide(&mmap->monsters[i], player->getBody()))
 			Manager::gmover = true;
 		for (int j = 0; j < mmap->sprites.size(); j++) {
 			if (collide(&mmap->monsters[i], &mmap->sprites[j]))
 				mmap->monsters[i].setPosition(prevX, prevY);
-		}
-		for (int a = i + 1; a < mmap->monsters.size(); a++) {
-			if (collide(&mmap->monsters[i], &mmap->monsters[a])) {
-				mmap->monsters[i].setPosition(prevX, prevY);
-				mmap->monsters[a].setPosition(prevX - 2.0f, prevY);
-			}
 		}
 	}
 }

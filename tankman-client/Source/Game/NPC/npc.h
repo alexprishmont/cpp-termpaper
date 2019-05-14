@@ -1,9 +1,9 @@
 #pragma once
 #include <iostream>
-#include "../Source/Engine/Graphics/Sprite.h"
-#include "../MapLoader/MapLoader.h"
 #include <cmath>
 #include <vector>
+#include "../Source/Engine/Graphics/Sprite.h"
+#include "../MapLoader/MapLoader.h"
 #include "../Player/Player.h"
 
 class NPC {
@@ -17,4 +17,6 @@ class NPC {
 		bool collide(Sprite* obj, Sprite* body);
 		MapLoader* mmap;
 		Player* player;
+
+		bool moveY;
 };
