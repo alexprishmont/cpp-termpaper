@@ -1,6 +1,4 @@
 #include "Player.h"
-#include "../Source/Engine/IO/Keyboard.h"
-#include "../MapLoader/MapLoader.h"
 Player::Player(MapLoader* map) {
 	playerPosition player = map->getPlayerPosition();
 	body = new Sprite("Source/Assets/Art/Player/elf_male.png", player.x, player.y);
@@ -10,8 +8,13 @@ Player::Player(MapLoader* map) {
 }
 
 Player::~Player() {
-	delete body;
-	delete mmap;
+	if (body != nullptr)
+		delete body;
+	if (mmap != nullptr)
+		delete mmap;
+
+	body = nullptr;
+	mmap = nullptr;
 }
 
 float Player::speed = 1.5;
@@ -53,6 +56,16 @@ void Player::move() {
 			body->setPosition(prevX, prevY);
 		}
 	}
+
+	for (int i = 0; i < mmap->coins.size(); i++) {
+		if (collide(&mmap->coins[i]))
+			mmap->coins.erase(mmap->coins.begin() + i);
+	}
+
+	if (collide(mmap->exit)) {
+		if (mmap->coins.size() <= 0)
+			Manager::theend = true;
+	}
 }
 
 void Player::render() {
@@ -60,4 +73,8 @@ void Player::render() {
 }
 
 Player::Player() {}
-Sprite Player::getBody() { return *body;  }
+Sprite* Player::getBody() { return body;  }
+
+void Player::setPosition(float x, float y) {
+	body->setPosition(x, y);
+}

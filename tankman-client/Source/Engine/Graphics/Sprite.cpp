@@ -7,6 +7,8 @@ Sprite::Sprite() {
 	scaleX = 0;
 	scaleY = 0;
 	texture = Texture();
+	sizeX = texture.getWidth();
+	sizeY = texture.getHeight();
 }
 
 Sprite::Sprite(std::string imagePath) {
@@ -16,6 +18,8 @@ Sprite::Sprite(std::string imagePath) {
 	rot = 0;
 	scaleX = 0;
 	scaleY = 0;
+	sizeX = texture.getWidth();
+	sizeY = texture.getHeight();
 }
 
 Sprite::Sprite(std::string imagePath, float _xPos, float _yPos) {
@@ -25,6 +29,8 @@ Sprite::Sprite(std::string imagePath, float _xPos, float _yPos) {
 	rot = 0;
 	scaleX = 0;
 	scaleY = 0;
+	sizeX = texture.getWidth();
+	sizeY = texture.getHeight();
 }
 
 
@@ -51,9 +57,6 @@ void Sprite::Render() {
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
-
-	sizeX = texture.getWidth();
-	sizeY = texture.getHeight();
 }
 
 void Sprite::Update() {
@@ -79,14 +82,14 @@ void Sprite::setScale(float x, float y) {
 	scaleY = y;
 }
 
-double Sprite::getPositionX() {
+float Sprite::getPositionX() {
 	return xPos;
 }
 
-double Sprite::getPositionY() {
+float Sprite::getPositionY() {
 	return yPos;
 }
 
-double Sprite::getRotation() {
+float Sprite::getRotation() {
 	return rot;
 }

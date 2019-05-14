@@ -20,6 +20,7 @@ class MapLoader {
 		std::vector<Sprite> sprites;
 		std::vector<Sprite> coins;
 		std::vector<Sprite> monsters;
+		Sprite* exit;
 	private:
 		std::vector<std::vector<char>> levelMap;
 		std::fstream mapFile;

@@ -57,6 +57,12 @@ void MapLoader::create() {
 				monster->setScale(scale);
 				monsters.push_back(*monster);
 			}
+			else if (temp == 'e') {
+				Sprite* _exit;
+				_exit = new Sprite("Source/Assets/Art/exit.png", j * width + width / 2, i * height + height / 2);
+				_exit->setScale(scale);
+				exit = _exit;
+			}
 		}
 	}
 }
@@ -66,6 +72,8 @@ void MapLoader::render() {
 		i.Render();
 	for (auto i : coins)
 		i.Render();
+
+	exit->Render();
 }
 
 playerPosition MapLoader::getPlayerPosition() {

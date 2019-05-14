@@ -5,7 +5,6 @@
 
 int main() {
 	Manager game;
-
 	game.Start();
 	return 0;
 }

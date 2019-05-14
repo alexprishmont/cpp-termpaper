@@ -6,15 +6,15 @@
 #include <vector>
 #include "../Player/Player.h"
 
-class NPC: public Player{
+class NPC {
 	public:
-		NPC(std::vector<Sprite> npcs, MapLoader* map);
+		NPC(MapLoader* map, Player* _player);
 		~NPC();
 
-		virtual void render() override;
-		virtual void move() override;
+		void render();
+		void move();
 	private:
 		bool collide(Sprite* obj, Sprite* body);
-		std::vector<Sprite> npc;
 		MapLoader* mmap;
+		Player* player;
 };

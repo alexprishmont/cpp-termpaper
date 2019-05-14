@@ -1,11 +1,19 @@
 #include "npc.h"
+#include "../Manager/Manager.h"
 
 float randFloat(float a, float b) {
 	return ((b - a) * ((float)rand() / RAND_MAX)) + a;
 }
 
-NPC::NPC(std::vector<Sprite> npcs, MapLoader* map) { npc = npcs; mmap = map; }
-NPC::~NPC() { delete mmap; }
+NPC::NPC(MapLoader* map, Player* _player) { mmap = map; player = _player;  }
+NPC::~NPC() { 
+	if (mmap != nullptr)
+		delete mmap; 
+	if (player != nullptr) 
+		delete player; 
+	mmap = nullptr; 
+	player = nullptr; 
+}
 
 bool NPC::collide(Sprite* obj, Sprite* body) {
 	float difX = body->getPositionX() - obj->getPositionX();
@@ -17,28 +25,27 @@ bool NPC::collide(Sprite* obj, Sprite* body) {
 }
 
 void NPC::move() {
-	for (auto n : npc) {
-		float x = randFloat(1.0f, 3.0f);
-		float y = randFloat(1.0f, 3.0f);
+	for (int i = 0; i < mmap->monsters.size(); i++) {
+		float prevX = mmap->monsters[i].getPositionX(), prevY = mmap->monsters[i].getPositionY();
+		float randX = randFloat(-5.0f, 6.0f), randY = randFloat(-3.0f, 5.0f);
+		mmap->monsters[i].setPosition(prevX + randX, prevY + randY);
 
-		float prevX = n.getPositionX(), prevY = n.getPositionY();
-		n.setPosition(prevX + x, prevY + y);
-
-		for (auto s : mmap->sprites) {
-			if (collide(&s, &n)) {
-				n.setPosition(prevX, prevY);
-				std::cout << "collision" << std::endl;
+		if (collide(&mmap->monsters[i], player->getBody()))
+			Manager::gmover = true;
+		for (int j = 0; j < mmap->sprites.size(); j++) {
+			if (collide(&mmap->monsters[i], &mmap->sprites[j]))
+				mmap->monsters[i].setPosition(prevX, prevY);
+		}
+		for (int a = i + 1; a < mmap->monsters.size(); a++) {
+			if (collide(&mmap->monsters[i], &mmap->monsters[a])) {
+				mmap->monsters[i].setPosition(prevX, prevY);
+				mmap->monsters[a].setPosition(prevX - 2.0f, prevY);
 			}
 		}
-
-		if (collide(&n, &Player::getBody())) {
-			std::cout << "collision with player" << std::endl;
-		}
-
 	}
 }
 
 void NPC::render() {
-	for (auto n : npc)
+	for (auto n : mmap->monsters)
 		n.Render();
 }
