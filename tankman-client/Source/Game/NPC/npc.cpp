@@ -26,23 +26,27 @@ bool NPC::collide(Sprite* obj, Sprite* body) {
 
 void NPC::move() {
 	for (int i = 0; i < mmap->monsters.size(); i++) {
+
 		float prevX = mmap->monsters[i].getPositionX(), prevY = mmap->monsters[i].getPositionY();
-		float randX = randFloat(-5.0f, 6.0f), randY = randFloat(-3.0f, 5.0f);
+		float randX = randFloat(-500.0f, 500.0f), randY = randFloat(-500.0f, 500.0f);
+
+		float playerX = player->getPositionX(), playerY = player->getPositionY();
 
 		if (!moveY) {
-			mmap->monsters[i].setPosition(prevX + randX, prevY);
+			mmap->monsters[i].setPosition(prevX + randX / playerX, prevY);
 			moveY = true;
 		}
 		else {
-			mmap->monsters[i].setPosition(prevX, prevY + randY);
+			mmap->monsters[i].setPosition(prevX, prevY + randY / playerY);
 			moveY = false;
 		}
 
 		if (collide(&mmap->monsters[i], player->getBody()))
 			Manager::gmover = true;
 		for (int j = 0; j < mmap->sprites.size(); j++) {
-			if (collide(&mmap->monsters[i], &mmap->sprites[j]))
+			if (collide(&mmap->monsters[i], &mmap->sprites[j])) {
 				mmap->monsters[i].setPosition(prevX, prevY);
+			}
 		}
 	}
 }

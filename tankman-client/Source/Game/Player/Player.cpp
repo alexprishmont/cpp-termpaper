@@ -80,3 +80,11 @@ Sprite* Player::getBody() { return body;  }
 void Player::setPosition(float x, float y) {
 	body->setPosition(x, y);
 }
+
+float Player::getPositionX() {
+	return body->getPositionX();
+}
+
+float Player::getPositionY() {
+	return body->getPositionY();
+}

@@ -16,6 +16,8 @@ class Player {
 		void move();
 		void render();
 		void setPosition(float x, float y);
+		float getPositionX();
+		float getPositionY();
 
 		Sprite* getBody();
 	private:
